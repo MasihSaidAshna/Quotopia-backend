@@ -1,7 +1,7 @@
 package com.example.quotopiabackend.dto.dtoCategory;
 
 
-import dat3.server_to_server.dto.dtoUnderCategory.UnderCategoryDTO;
+import com.example.quotopiabackend.dto.dtoUnderCategory.UnderCategoryDTO;
 import jakarta.persistence.*;
 
 import java.util.List;

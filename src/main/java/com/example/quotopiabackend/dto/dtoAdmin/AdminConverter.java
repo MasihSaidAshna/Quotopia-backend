@@ -1,6 +1,6 @@
 package com.example.quotopiabackend.dto.dtoAdmin;
 
-import dat3.server_to_server.entity.Admin;
+import com.example.quotopiabackend.entity.Admin;
 import org.springframework.stereotype.Component;
 
 @Component

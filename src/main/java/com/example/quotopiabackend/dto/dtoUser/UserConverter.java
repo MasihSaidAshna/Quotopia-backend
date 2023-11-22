@@ -1,6 +1,7 @@
 package com.example.quotopiabackend.dto.dtoUser;
 
-import dat3.server_to_server.entity.User;
+
+import com.example.quotopiabackend.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
