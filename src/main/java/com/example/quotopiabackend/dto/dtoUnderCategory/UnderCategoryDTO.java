@@ -1,7 +1,7 @@
 package com.example.quotopiabackend.dto.dtoUnderCategory;
 
-import dat3.server_to_server.dto.dtoCategory.CategoryDTO;
-import jakarta.persistence.*;
+
+import com.example.quotopiabackend.dto.dtoCategory.CategoryDTO;
 
 public record UnderCategoryDTO(int underCategoryId, String underCategoryName, CategoryDTO categoryDTO ) {
 

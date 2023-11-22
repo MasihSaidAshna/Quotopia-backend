@@ -1,6 +1,7 @@
 package com.example.quotopiabackend.dto.dtoAuthor;
 
-import dat3.server_to_server.dto.dtoQuotes.QuotesDTO;
+
+import com.example.quotopiabackend.dto.dtoQuotes.QuotesDTO;
 
 import java.util.List;
 

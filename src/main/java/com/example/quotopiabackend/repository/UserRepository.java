@@ -1,6 +1,6 @@
 package com.example.quotopiabackend.repository;
 
-import dat3.server_to_server.entity.User;
+import com.example.quotopiabackend.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
