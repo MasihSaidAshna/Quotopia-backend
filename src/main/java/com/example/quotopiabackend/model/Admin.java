@@ -1,4 +1,4 @@
-package com.example.quotopiabackend.entity;
+package com.example.quotopiabackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -23,7 +23,7 @@ public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "admin_id")
-    private int adminId;
+    private int adminID;
 
     @Column(name = "admin_name")
     @NotBlank(message = "Admin name is required")
@@ -38,8 +38,8 @@ public class Admin {
     @JsonIgnore
     private String adminPassword;
 
-    public Admin(int adminId, String adminName, String adminEmail) {
-        this.adminId = adminId;
+    public Admin(int adminID, String adminName, String adminEmail) {
+        this.adminID = adminID;
         this.adminName = adminName;
         this.adminEmail = adminEmail;
     }
