@@ -6,6 +6,7 @@ import com.example.quotopiabackend.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 @Component
@@ -19,15 +20,16 @@ public class AuthorConverter {
                 author.getAuthorID(),
                 author.getAuthorName(),
                 author.getQuoteList().stream()
-                        .map(quoteConverter::toQuoteDTO).collect(Collectors.toList())
+                        .map(quoteConverter::toQuoteDTO)
+                        .collect(Collectors.toList())
 
         );
     }
 
     public Author toAuthorModel(AuthorDTO authorDTO) {
         Author author = new Author();
-        author.setAuthorID(authorDTO.authorID());
         author.setAuthorName(authorDTO.authorName());
+        author.setQuoteList(new ArrayList<>());
         return author;
     }
 
