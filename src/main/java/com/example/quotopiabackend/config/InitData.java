@@ -52,4 +52,6 @@ public class InitData implements CommandLineRunner {
         quoteService.createQuote(quote1);
         quoteService.createQuote(quote2);
     }
+
+
 }

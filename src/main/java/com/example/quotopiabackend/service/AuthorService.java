@@ -28,8 +28,8 @@ public class AuthorService {
                 .collect(Collectors.toList());
     }
 
-    public AuthorDTO getAuthorById(int authorId) {
-        Optional<Author> authorOptional = authorRepository.findById(authorId);
+    public AuthorDTO getAuthorById(int authorID) {
+        Optional<Author> authorOptional = authorRepository.findById(authorID);
         return authorOptional.map(authorConverter::toAuthorDTO).orElse(null);
     }
 
@@ -39,8 +39,8 @@ public class AuthorService {
         return authorConverter.toAuthorDTO(author);
     }
 
-    public AuthorDTO updateAuthor(int authorId, AuthorDTO authorDTO) {
-        Author existingAuthor = authorRepository.findById(authorId).orElse(null);
+    public AuthorDTO updateAuthor(int authorID, AuthorDTO authorDTO) {
+        Author existingAuthor = authorRepository.findById(authorID).orElse(null);
         if (existingAuthor != null) {
             existingAuthor.setAuthorName(authorDTO.authorName());
             existingAuthor = authorRepository.save(existingAuthor);
@@ -49,9 +49,9 @@ public class AuthorService {
         return null;
     }
 
-    public boolean deleteAuthor(int authorId) {
-        if (authorRepository.existsById(authorId)) {
-            authorRepository.deleteById(authorId);
+    public boolean deleteAuthor(int authorID) {
+        if (authorRepository.existsById(authorID)) {
+            authorRepository.deleteById(authorID);
             return true;
         }
         return false;
