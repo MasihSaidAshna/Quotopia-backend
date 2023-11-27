@@ -1,4 +1,4 @@
-package com.example.quotopiabackend.entity;
+package com.example.quotopiabackend.model;
 
 
 import jakarta.persistence.*;
@@ -13,23 +13,23 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 @Table(name = "quotes")
-public class Quotes {
+public class Quote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "quotes_id")
-    private int quotesId;
+    @Column(name = "quote_id")
+    private int quoteID;
 
     @Column(name = "quote_text")
     private String quoteText;
 
     @ManyToOne
-    @JoinColumn(name = "author")
-    private Authur author;
+    @JoinColumn(name = "author_id")
+    private Author author;
 
     @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Category category;
+    @JoinColumn(name = "genre_id")
+    private Genre genre;
 
 
 }

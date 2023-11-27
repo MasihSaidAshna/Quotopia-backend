@@ -1,4 +1,4 @@
-package com.example.quotopiabackend.entity;
+package com.example.quotopiabackend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -14,17 +14,17 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "author")
-public class Authur {
+public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "author_id")
-    private int authorId;
+    private int authorID;
 
     @Column(name = "author_name")
     private String authorName;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    private List<Quotes> quotesList;
+    private List<Quote> quoteList;
 
 }
