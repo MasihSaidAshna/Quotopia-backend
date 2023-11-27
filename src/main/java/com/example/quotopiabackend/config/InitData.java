@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+
 @Component
 public class InitData implements CommandLineRunner {
 
@@ -30,16 +32,16 @@ public class InitData implements CommandLineRunner {
     }
 
     private void initializeAuthors() {
-        AuthorDTO author1 = new AuthorDTO(1, "John Doe", null);
-        AuthorDTO author2 = new AuthorDTO(2, "Jane Smith", null);
+        AuthorDTO author1 = new AuthorDTO(1, "John Doe", new ArrayList<>());
+        AuthorDTO author2 = new AuthorDTO(2, "Jane Smith", new ArrayList<>());
 
         authorService.createAuthor(author1);
         authorService.createAuthor(author2);
     }
 
     private void initializeGenres() {
-        GenreDTO genre1 = new GenreDTO(1, "Fiction", null);
-        GenreDTO genre2 = new GenreDTO(2, "Science Fiction", null);
+        GenreDTO genre1 = new GenreDTO(1, "Fiction", new ArrayList<>());
+        GenreDTO genre2 = new GenreDTO(2, "Science Fiction", new ArrayList<>());
 
         genreService.createGenre(genre1);
         genreService.createGenre(genre2);
@@ -55,3 +57,7 @@ public class InitData implements CommandLineRunner {
 
 
 }
+
+
+
+

@@ -1,14 +1,11 @@
 package com.example.quotopiabackend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -23,17 +20,13 @@ public class User {
     @Column(name = "user_id")
     private int userID;
 
-    @Column(name = "user_name")
-    @NotBlank(message = "User name is required")
+    @Column(name = "user_name", nullable = false)
     private String userName;
 
-    @Column(name = "user_email")
-    @Email(message = "Please provide a valid email address")
+    @Column(name = "user_email", nullable = false)
     private String userEmail;
 
-    @Column(name = "user_password")
-    @NotBlank(message = "Password is required")
-    @JsonIgnore
+    @Column(name = "user_password", nullable = false)
     private String userPassword;
 
     public User(int userID, String userName, String userEmail) {
