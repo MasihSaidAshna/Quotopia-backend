@@ -1,4 +1,4 @@
-package com.example.quotopiabackend.dto.dtoSubCategory;
+package com.example.quotopiabackend.dto.dtoSubGenre;
 
 import com.example.quotopiabackend.model.SubGenre;
 import org.springframework.stereotype.Component;
@@ -18,11 +18,15 @@ public class SubGenreDTOConverter {
 
     public SubGenre toSubGenreModel(SubGenreDTO subGenreDTO) {
         SubGenre subGenre = new SubGenre();
-        subGenre.setSubGenreID(subGenre.getSubGenreID());
-        subGenre.setSubGenreName(subGenre.getSubGenreName());
+        subGenre.setSubGenreID(subGenreDTO.subGenreID());
+        subGenre.setSubGenreName(subGenreDTO.subGenreName());
 
         return subGenre;
     }
+
+
+
+
 
 
 }

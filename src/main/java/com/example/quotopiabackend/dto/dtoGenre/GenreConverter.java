@@ -1,12 +1,13 @@
 package com.example.quotopiabackend.dto.dtoGenre;
 
-import com.example.quotopiabackend.dto.dtoSubCategory.SubGenreDTOConverter;
-import com.example.quotopiabackend.dto.dtoSubCategory.SubGenreDTO;
+import com.example.quotopiabackend.dto.dtoSubGenre.SubGenreDTOConverter;
+import com.example.quotopiabackend.dto.dtoSubGenre.SubGenreDTO;
 import com.example.quotopiabackend.model.Genre;
 import com.example.quotopiabackend.model.SubGenre;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -15,7 +16,7 @@ public class GenreConverter {
     @Autowired
     private SubGenreDTOConverter subGenreDTOConverter;
 
-    public GenreDTO toCategoryDTO(Genre genre) {
+    public GenreDTO toGenreDTO(Genre genre) {
         return new GenreDTO(
                 genre.getGenreID(),
                 genre.getGenreName(),
@@ -26,12 +27,17 @@ public class GenreConverter {
     }
 
 
-    public SubGenre toUnderCategoryEntity(SubGenreDTO subGenreDTO) {
-        SubGenre subGenre = new SubGenre();
-        subGenre.setSubGenreName(subGenreDTO.subGenreName());
-        subGenre.setSubGenreID(subGenreDTO.subGenreID());
+    public Genre toGenreModel(GenreDTO genreDTO) {
+        Genre genre = new Genre();
+        genre.setGenreName(genreDTO.genreName());
 
-        return subGenre;
+        List<SubGenreDTO> subGenreDTOList = genreDTO.subGenreDTOList();
+        if (subGenreDTOList != null) {
+            List<SubGenre> subGenres = subGenreDTOList.stream().map(subGenreDTOConverter::toSubGenreModel).collect(Collectors.toList());
+            genre.setSubGenres(subGenres);
+        }
+
+        return genre;
     }
 
 

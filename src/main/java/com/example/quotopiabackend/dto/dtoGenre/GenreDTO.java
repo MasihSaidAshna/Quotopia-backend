@@ -1,7 +1,7 @@
 package com.example.quotopiabackend.dto.dtoGenre;
 
 
-import com.example.quotopiabackend.dto.dtoSubCategory.SubGenreDTO;
+import com.example.quotopiabackend.dto.dtoSubGenre.SubGenreDTO;
 
 import java.util.List;
 

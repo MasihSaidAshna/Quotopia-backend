@@ -24,7 +24,7 @@ public class AuthorConverter {
         );
     }
 
-    public Authur toAuthorEntity(AuthorDTO authorDTO) {
+    public Authur toAuthorModel(AuthorDTO authorDTO) {
         Authur authur = new Authur();
         authur.setAuthorID(authorDTO.authorID());
         authur.setAuthorName(authorDTO.authorName());
