@@ -24,8 +24,9 @@ public class UnderCategory {
     @Column(name = "under_category_name")
     private String underCategoryName;
 
-    @OneToMany(mappedBy = "category")
-    private List<UnderCategory> underCategories;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
 
 
