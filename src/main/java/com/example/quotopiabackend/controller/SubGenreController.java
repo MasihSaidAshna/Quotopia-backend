@@ -1,9 +1,7 @@
 package com.example.quotopiabackend.controller;
 
 
-import com.example.quotopiabackend.dto.dtoGenre.GenreDTO;
 import com.example.quotopiabackend.dto.dtoSubGenre.SubGenreDTO;
-import com.example.quotopiabackend.model.Genre;
 import com.example.quotopiabackend.service.SubGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

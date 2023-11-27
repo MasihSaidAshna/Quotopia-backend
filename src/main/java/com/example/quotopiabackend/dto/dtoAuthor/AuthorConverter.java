@@ -2,7 +2,7 @@ package com.example.quotopiabackend.dto.dtoAuthor;
 
 
 import com.example.quotopiabackend.dto.dtoQuote.QuoteConverter;
-import com.example.quotopiabackend.model.Authur;
+import com.example.quotopiabackend.model.Author;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -14,21 +14,21 @@ public class AuthorConverter {
     @Autowired
     private QuoteConverter quoteConverter;
 
-    public AuthorDTO toAuthorDTO(Authur authur) {
+    public AuthorDTO toAuthorDTO(Author author) {
         return new AuthorDTO(
-                authur.getAuthorID(),
-                authur.getAuthorName(),
-                authur.getQuoteList().stream()
+                author.getAuthorID(),
+                author.getAuthorName(),
+                author.getQuoteList().stream()
                         .map(quoteConverter::toQuoteDTO).collect(Collectors.toList())
 
         );
     }
 
-    public Authur toAuthorModel(AuthorDTO authorDTO) {
-        Authur authur = new Authur();
-        authur.setAuthorID(authorDTO.authorID());
-        authur.setAuthorName(authorDTO.authorName());
-        return authur;
+    public Author toAuthorModel(AuthorDTO authorDTO) {
+        Author author = new Author();
+        author.setAuthorID(authorDTO.authorID());
+        author.setAuthorName(authorDTO.authorName());
+        return author;
     }
 
 

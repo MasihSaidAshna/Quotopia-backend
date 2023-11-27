@@ -1,9 +1,6 @@
 package com.example.quotopiabackend.dto.dtoQuote;
 
-import com.example.quotopiabackend.dto.dtoAuthor.AuthorConverter;
-import com.example.quotopiabackend.dto.dtoGenre.GenreConverter;
 import com.example.quotopiabackend.model.Quote;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component

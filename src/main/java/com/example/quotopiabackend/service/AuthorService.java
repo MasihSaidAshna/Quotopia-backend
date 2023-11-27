@@ -2,7 +2,7 @@ package com.example.quotopiabackend.service;
 
 import com.example.quotopiabackend.dto.dtoAuthor.AuthorConverter;
 import com.example.quotopiabackend.dto.dtoAuthor.AuthorDTO;
-import com.example.quotopiabackend.model.Authur;
+import com.example.quotopiabackend.model.Author;
 import com.example.quotopiabackend.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,25 +22,25 @@ public class AuthorService {
 
 
     public List<AuthorDTO> getAllAuthors() {
-        List<Authur> authors = authorRepository.findAll();
+        List<Author> authors = authorRepository.findAll();
         return authors.stream()
                 .map(authorConverter::toAuthorDTO)
                 .collect(Collectors.toList());
     }
 
     public AuthorDTO getAuthorById(int authorId) {
-        Optional<Authur> authorOptional = authorRepository.findById(authorId);
+        Optional<Author> authorOptional = authorRepository.findById(authorId);
         return authorOptional.map(authorConverter::toAuthorDTO).orElse(null);
     }
 
     public AuthorDTO createAuthor(AuthorDTO authorDTO) {
-        Authur authur = authorConverter.toAuthorModel(authorDTO);
-        authur = authorRepository.save(authur);
-        return authorConverter.toAuthorDTO(authur);
+        Author author = authorConverter.toAuthorModel(authorDTO);
+        author = authorRepository.save(author);
+        return authorConverter.toAuthorDTO(author);
     }
 
     public AuthorDTO updateAuthor(int authorId, AuthorDTO authorDTO) {
-        Authur existingAuthor = authorRepository.findById(authorId).orElse(null);
+        Author existingAuthor = authorRepository.findById(authorId).orElse(null);
         if (existingAuthor != null) {
             existingAuthor.setAuthorName(authorDTO.authorName());
             existingAuthor = authorRepository.save(existingAuthor);

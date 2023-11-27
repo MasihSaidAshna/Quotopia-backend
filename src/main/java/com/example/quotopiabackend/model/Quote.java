@@ -25,7 +25,7 @@ public class Quote {
 
     @ManyToOne
     @JoinColumn(name = "author_id")
-    private Authur author;
+    private Author author;
 
     @ManyToOne
     @JoinColumn(name = "genre_id")
