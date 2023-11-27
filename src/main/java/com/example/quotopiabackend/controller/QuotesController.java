@@ -10,7 +10,6 @@ public class QuotesController
 {
     private final QuotesService quotesService;
 
-    @Autowired
     public QuotesController(QuotesService quotesService) {
         this.quotesService = quotesService;
     }
