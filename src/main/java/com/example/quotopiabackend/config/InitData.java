@@ -6,21 +6,23 @@ import com.example.quotopiabackend.dto.dtoQuote.QuoteDTO;
 import com.example.quotopiabackend.service.AuthorService;
 import com.example.quotopiabackend.service.GenreService;
 import com.example.quotopiabackend.service.QuoteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InitData implements CommandLineRunner {
 
-    @Autowired
-    private AuthorService authorService;
+    private final AuthorService authorService;
 
-    @Autowired
-    private GenreService genreService;
+    private final GenreService genreService;
 
-    @Autowired
-    private QuoteService quoteService;
+    private final QuoteService quoteService;
+
+    public InitData(AuthorService authorService, GenreService genreService, QuoteService quoteService) {
+        this.authorService = authorService;
+        this.genreService = genreService;
+        this.quoteService = quoteService;
+    }
 
     @Override
     public void run(String... args) {
@@ -55,3 +57,7 @@ public class InitData implements CommandLineRunner {
 
 
 }
+
+
+
+
