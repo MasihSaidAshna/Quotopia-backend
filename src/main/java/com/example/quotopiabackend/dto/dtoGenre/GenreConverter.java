@@ -1,7 +1,7 @@
 package com.example.quotopiabackend.dto.dtoGenre;
 
-import com.example.quotopiabackend.dto.dtoSubGenre.SubGenreDTOConverter;
 import com.example.quotopiabackend.dto.dtoSubGenre.SubGenreDTO;
+import com.example.quotopiabackend.dto.dtoSubGenre.SubGenreDTOConverter;
 import com.example.quotopiabackend.model.Genre;
 import com.example.quotopiabackend.model.SubGenre;
 import org.springframework.beans.factory.annotation.Autowired;

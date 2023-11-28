@@ -1,15 +1,13 @@
 package com.example.quotopiabackend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 
 
 @Getter
@@ -22,20 +20,16 @@ public class Admin {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "admin_id")
+    @Column(name = "admin_id", nullable = false)
     private int adminID;
 
-    @Column(name = "admin_name")
-    @NotBlank(message = "Admin name is required")
+    @Column(name = "admin_name", nullable = false)
     private String adminName;
 
     @Column(name = "admin_email")
-    @Email(message = "Please provide a valid email address")
     private String adminEmail;
 
-    @Column(name = "admin_password")
-    @NotBlank(message = "Password is required")
-    @JsonIgnore
+    @Column(name = "admin_password", nullable = false)
     private String adminPassword;
 
     public Admin(int adminID, String adminName, String adminEmail) {

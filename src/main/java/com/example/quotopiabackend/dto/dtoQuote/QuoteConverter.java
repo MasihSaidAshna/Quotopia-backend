@@ -1,5 +1,7 @@
 package com.example.quotopiabackend.dto.dtoQuote;
 
+import com.example.quotopiabackend.model.Author;
+import com.example.quotopiabackend.model.Genre;
 import com.example.quotopiabackend.model.Quote;
 import org.springframework.stereotype.Component;
 
@@ -16,14 +18,12 @@ public class QuoteConverter {
 
     }
 
-    public Quote toQuoteModel(QuoteDTO quoteDTO) {
+    public Quote toQuoteModel(QuoteDTO quoteDTO, Genre genre, Author author) {
         Quote quote = new Quote();
-        quote.setQuoteID(quoteDTO.quoteID());
         quote.setQuoteText(quoteDTO.quoteText());
-
+        quote.setAuthor(author);
+        quote.setGenre(genre);
         return quote;
     }
-
-
 }
 

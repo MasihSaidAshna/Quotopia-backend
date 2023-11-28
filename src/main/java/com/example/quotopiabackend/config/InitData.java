@@ -3,11 +3,15 @@ package com.example.quotopiabackend.config;
 import com.example.quotopiabackend.dto.dtoAuthor.AuthorDTO;
 import com.example.quotopiabackend.dto.dtoGenre.GenreDTO;
 import com.example.quotopiabackend.dto.dtoQuote.QuoteDTO;
+import com.example.quotopiabackend.dto.dtoSubGenre.SubGenreDTO;
 import com.example.quotopiabackend.service.AuthorService;
 import com.example.quotopiabackend.service.GenreService;
 import com.example.quotopiabackend.service.QuoteService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class InitData implements CommandLineRunner {
@@ -26,33 +30,38 @@ public class InitData implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        initializeAuthors();
-        initializeGenres();
-        initializeQuotes();
+        AuthorDTO author1 = createAuthor("John Doe", new ArrayList<>());
+        AuthorDTO author2 = createAuthor("Jane Smith", new ArrayList<>());
+        AuthorDTO author3 = createAuthor("Cihad Özdemir", new ArrayList<>());
+        AuthorDTO author4 = createAuthor("Cristiano Ronaldo", new ArrayList<>());
+
+        GenreDTO genre1 = createGenre("Fiction", new ArrayList<>());
+        GenreDTO genre2 = createGenre("Science Fiction", new ArrayList<>());
+        GenreDTO genre3 = createGenre("Science", new ArrayList<>());
+        GenreDTO genre4 = createGenre("Sport", new ArrayList<>());
+
+        createQuote("This is a quote.", author1, genre1);
+        createQuote("Another quote.", author2, genre2);
+        createQuote("Just finish the school i make money", author3, genre3);
+        createQuote("I don't mind people hating me, because it pushes me.", author4, genre4);
+        createQuote("I don't have to show anything to anyone. There is nothing to prove.", author4, genre4);
     }
 
-    private void initializeAuthors() {
-        AuthorDTO author1 = new AuthorDTO(1, "John Doe", null);
-        AuthorDTO author2 = new AuthorDTO(2, "Jane Smith", null);
-
-        authorService.createAuthor(author1);
-        authorService.createAuthor(author2);
+    private AuthorDTO createAuthor(String name, List<QuoteDTO> quotes) {
+        AuthorDTO author = new AuthorDTO(0, name, quotes);
+        return authorService.createAuthor(author);
     }
 
-    private void initializeGenres() {
-        GenreDTO genre1 = new GenreDTO(1, "Fiction", null);
-        GenreDTO genre2 = new GenreDTO(2, "Science Fiction", null);
+    private GenreDTO createGenre(String name, List<SubGenreDTO> subGenres) {
+        GenreDTO genre = new GenreDTO(-1, name, subGenres);
 
-        genreService.createGenre(genre1);
-        genreService.createGenre(genre2);
+        return genreService.createGenre(genre);
     }
 
-    private void initializeQuotes() {
-        QuoteDTO quote1 = new QuoteDTO(1, "This is a quote.", 1, 1);
-        QuoteDTO quote2 = new QuoteDTO(2, "Another quote.", 2, 2);
+    private void createQuote(String quote, AuthorDTO author, GenreDTO genre) {
+        QuoteDTO quote1 = new QuoteDTO(-1, quote, author.authorID(), genre.genreID());
 
         quoteService.createQuote(quote1);
-        quoteService.createQuote(quote2);
     }
 
 

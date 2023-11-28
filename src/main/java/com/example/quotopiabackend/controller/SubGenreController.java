@@ -8,9 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
-@RequestMapping("/genre")
+@RequestMapping("api/subgenre")
 public class SubGenreController {
 
     @Autowired
@@ -46,8 +46,6 @@ public class SubGenreController {
         boolean deleted = subGenreService.deleteSubGenre(id);
         return (deleted) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
-
-
 }
 
 
