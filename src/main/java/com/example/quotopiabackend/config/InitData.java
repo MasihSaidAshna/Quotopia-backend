@@ -30,12 +30,19 @@ public class InitData implements CommandLineRunner {
     public void run(String... args) {
         AuthorDTO author1 = createAuthor("John Doe", new ArrayList<>());
         AuthorDTO author2 = createAuthor("Jane Smith", new ArrayList<>());
+        AuthorDTO author3 = createAuthor("Cihad Özdemir", new ArrayList<>());
+        AuthorDTO author4 = createAuthor("Cristiano Ronaldo", new ArrayList<>());
 
         GenreDTO genre1 = createGenre("Fiction", new ArrayList<>());
         GenreDTO genre2 = createGenre("Science Fiction", new ArrayList<>());
+        GenreDTO genre3 = createGenre("Science", new ArrayList<>());
+        GenreDTO genre4 = createGenre("Sport", new ArrayList<>());
 
         createQuote("This is a quote.", author1, genre1);
         createQuote("Another quote.", author2, genre2);
+        createQuote("Just finish the school i make money", author3, genre3);
+        createQuote("I don't mind people hating me, because it pushes me.", author4, genre4);
+        createQuote("I don't have to show anything to anyone. There is nothing to prove.", author4, genre4);
     }
 
     private AuthorDTO createAuthor(String name, List<QuoteDTO> quotes) {
