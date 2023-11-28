@@ -15,6 +15,8 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
 
+
+
     @GetMapping
     public ResponseEntity<List<AuthorDTO>> getAllAuthors() {
         return ResponseEntity.ok(authorService.getAllAuthors());
@@ -32,11 +34,13 @@ public class AuthorController {
         return ResponseEntity.ok(createdAuthor);
     }
 
+
     @PutMapping("/{id}")
     public ResponseEntity<AuthorDTO> updateAuthor(@PathVariable int id, @RequestBody AuthorDTO authorDTO) {
         AuthorDTO updatedAuthor = authorService.updateAuthor(id, authorDTO);
         return (updatedAuthor != null) ? ResponseEntity.ok(updatedAuthor) : ResponseEntity.notFound().build();
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAuthor(@PathVariable int id) {
