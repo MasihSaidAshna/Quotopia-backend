@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("api/quote")
@@ -42,8 +43,6 @@ public class QuoteController {
         boolean deleted = quoteService.deleteQuote(id);
         return (deleted) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
-
-
 
 
 }
