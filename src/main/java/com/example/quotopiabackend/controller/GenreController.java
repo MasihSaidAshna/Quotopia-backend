@@ -34,7 +34,7 @@ public class GenreController {
         GenreDTO createdGenre = genreService.createGenre(genreDTO);
         return ResponseEntity.ok(createdGenre);
     }
-
+//todo forbehold til admin
     @PutMapping("/{id)")
     public ResponseEntity<GenreDTO> createGenre(@PathVariable int id, @RequestBody GenreDTO genreDTO) {
         GenreDTO updatedGenre = genreService.updateGenre(id, genreDTO);
