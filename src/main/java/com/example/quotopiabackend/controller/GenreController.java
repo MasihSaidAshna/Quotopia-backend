@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("api/genre")
@@ -35,6 +36,7 @@ public class GenreController {
         return ResponseEntity.ok(createdGenre);
     }
 
+    //todo forbehold til admin
     @PutMapping("/{id)")
     public ResponseEntity<GenreDTO> createGenre(@PathVariable int id, @RequestBody GenreDTO genreDTO) {
         GenreDTO updatedGenre = genreService.updateGenre(id, genreDTO);
@@ -48,3 +50,5 @@ public class GenreController {
     }
 
 }
+
+

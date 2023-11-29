@@ -7,7 +7,6 @@ import com.example.quotopiabackend.dto.dtoSubGenre.SubGenreDTO;
 import com.example.quotopiabackend.service.AuthorService;
 import com.example.quotopiabackend.service.GenreService;
 import com.example.quotopiabackend.service.QuoteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -17,14 +16,17 @@ import java.util.List;
 @Component
 public class InitData implements CommandLineRunner {
 
-    @Autowired
-    private AuthorService authorService;
+    private final AuthorService authorService;
 
-    @Autowired
-    private GenreService genreService;
+    private final GenreService genreService;
 
-    @Autowired
-    private QuoteService quoteService;
+    private final QuoteService quoteService;
+
+    public InitData(AuthorService authorService, GenreService genreService, QuoteService quoteService) {
+        this.authorService = authorService;
+        this.genreService = genreService;
+        this.quoteService = quoteService;
+    }
 
     @Override
     public void run(String... args) {
@@ -40,7 +42,7 @@ public class InitData implements CommandLineRunner {
 
         createQuote("This is a quote.", author1, genre1);
         createQuote("Another quote.", author2, genre2);
-        createQuote("Just finish the school i make money", author3, genre3);
+        createQuote("Just finish  school and make money", author3, genre3);
         createQuote("I don't mind people hating me, because it pushes me.", author4, genre4);
         createQuote("I don't have to show anything to anyone. There is nothing to prove.", author4, genre4);
     }
