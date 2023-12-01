@@ -9,6 +9,7 @@ public class UserPasswordConverter {
         return new User(userPasswordDTO.userID(),
                 userPasswordDTO.userEmail(),
                 userPasswordDTO.userName(),
+                userPasswordDTO.isAdmin(),
                 userPasswordDTO.userPassword());
 
     }

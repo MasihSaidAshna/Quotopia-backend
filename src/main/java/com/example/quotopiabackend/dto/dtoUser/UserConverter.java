@@ -7,12 +7,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserConverter {
 
-
     public UserDTO toUserDTO(User user) {
-        return new UserDTO(user.getUserID(), user.getUserName(), user.getUserEmail());
+        return new UserDTO(user.getUserID(), user.getUserName(), user.getUserEmail(), user.isAdmin());
     }
 
-    public User toUserModel(UserDTO userDTO) {
-        return new User(userDTO.userID(), userDTO.userName(), userDTO.userEmail());
+ /*   public User toUserModel(UserDTO userDTO) {
+        return new User(userDTO.userID(), userDTO.userName(), userDTO.userEmail(), userDTO.isAdmin());
     }
+
+  */
 }

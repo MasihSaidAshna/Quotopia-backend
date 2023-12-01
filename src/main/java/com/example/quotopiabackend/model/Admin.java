@@ -37,4 +37,10 @@ public class Admin {
         this.adminName = adminName;
         this.adminEmail = adminEmail;
     }
+
+    public Admin(String adminName, String adminEmail, String adminPassword) {
+        this.adminName = adminName;
+        this.adminEmail = adminEmail;
+        this.adminPassword = adminPassword;
+    }
 }

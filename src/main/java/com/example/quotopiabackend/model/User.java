@@ -26,13 +26,23 @@ public class User {
     @Column(name = "user_email", nullable = false)
     private String userEmail;
 
+    @Column(name = "is_admin", nullable = false)
+    private boolean isAdmin;
+
     @Column(name = "user_password", nullable = false)
     private String userPassword;
 
-    public User(int userID, String userName, String userEmail) {
-        this.userID = userID;
+
+    public User(String userName, String userEmail, boolean isAdmin) {
         this.userName = userName;
         this.userEmail = userEmail;
+        this.isAdmin = isAdmin;
     }
-    //numerate
+
+    public User(String userName, String userEmail, boolean isAdmin, String userPassword) {
+        this.userName = userName;
+        this.userEmail = userEmail;
+        this.isAdmin = isAdmin;
+        this.userPassword = userPassword;
+    }
 }

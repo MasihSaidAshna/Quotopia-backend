@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -19,33 +20,29 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/save")
-    public ResponseEntity<User> saveUser(@RequestBody UserDTO userDTO) {
-        User savedUser = userService.saveUser(userDTO);
-        return ResponseEntity.ok(savedUser);
+    @GetMapping("/getAll")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        return userService.getAllUsers();
     }
 
-    @PostMapping("/save-with-password")
-    public ResponseEntity<User> saveUserWithPassword(@RequestBody UserPasswordDTO userPasswordDTO) {
-        User savedUser = userService.saveUserWithPassword(userPasswordDTO);
-        return ResponseEntity.ok(savedUser);
+    @GetMapping("/get/{id}")
+    public ResponseEntity<UserDTO> getUserById(@PathVariable int id) {
+        return userService.getUserById(id);
     }
 
-    @PutMapping("/update/{userID}")
-    public ResponseEntity<User> updateUser(@PathVariable int userID, @RequestBody UserDTO userDTO) {
-        User updatedUser = userService.updateUser(userID, userDTO);
-        if (updatedUser != null) {
-            return ResponseEntity.ok(updatedUser);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping("/saveWithPassword")
+    public ResponseEntity<UserDTO> saveUserWithPassword(@RequestBody UserPasswordDTO userPasswordDTO) {
+        return userService.saveUserWithPassword(userPasswordDTO);
     }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<UserDTO>> getAllUser() {
-        List<UserDTO> users = userService.getAllUser();
-        return ResponseEntity.ok(users);
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable int id, @RequestBody UserDTO userDTO) {
+        return userService.updateUser(id, userDTO);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable int id) {
+        return userService.deleteUser(id);
+    }
 
 }

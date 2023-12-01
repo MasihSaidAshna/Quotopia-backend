@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 @Service
 public class AuthorService {
 
-@Autowired
-private AuthorRepository authorRepository;
+    @Autowired
+    private AuthorRepository authorRepository;
 
-@Autowired
-private AuthorConverter authorConverter;
+    @Autowired
+    private AuthorConverter authorConverter;
 
     public List<AuthorDTO> getAllAuthors() {
         List<Author> authors = authorRepository.findAll();
@@ -55,6 +55,7 @@ private AuthorConverter authorConverter;
         }
         return false;
     }
+
 }
 
 
