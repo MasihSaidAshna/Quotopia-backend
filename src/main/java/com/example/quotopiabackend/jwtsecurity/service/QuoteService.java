@@ -21,12 +21,6 @@ public class QuoteService {
 
 
     @Autowired
-    private GenreRepository genreRepository;
-
-    @Autowired
-    private AuthorRepository authorRepository;
-
-    @Autowired
     private QuoteConverter quoteConverter;
 
     public List<QuoteDTO> getAllQuotes() {

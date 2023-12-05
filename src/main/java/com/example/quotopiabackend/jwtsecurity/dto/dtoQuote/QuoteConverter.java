@@ -1,23 +1,15 @@
 package com.example.quotopiabackend.jwtsecurity.dto.dtoQuote;
 
-import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteDTO;
 import com.example.quotopiabackend.jwtsecurity.model.Author;
 import com.example.quotopiabackend.jwtsecurity.model.Genre;
 import com.example.quotopiabackend.jwtsecurity.model.Quote;
-import com.example.quotopiabackend.jwtsecurity.service.AuthorService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class QuoteConverter
-{
-
-    @Autowired
-    AuthorService authorService;
+public class QuoteConverter {
 
 
-    public QuoteDTO toQuoteDTO(Quote quote)
-    {
+    public QuoteDTO toQuoteDTO(Quote quote) {
         int authorID = quote.getAuthor().getAuthorID();
         String authorName = quote.getAuthor().getAuthorName();
         int genreID = quote.getGenre().getGenreID();
@@ -32,8 +24,7 @@ public class QuoteConverter
     }
 
 
-    public Quote toQuoteModel(QuoteDTO quoteDTO)
-    {
+    public Quote toQuoteModel(QuoteDTO quoteDTO) {
         Quote quote = new Quote();
         quote.setQuoteText(quoteDTO.quoteText());
 
