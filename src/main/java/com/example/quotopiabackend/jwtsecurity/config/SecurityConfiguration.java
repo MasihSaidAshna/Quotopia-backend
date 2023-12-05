@@ -5,7 +5,6 @@ import com.example.quotopiabackend.jwtsecurity.JwtFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -22,9 +21,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @AllArgsConstructor
 public class SecurityConfiguration implements WebMvcConfigurer {
 
+    private static PasswordEncoder passwordEncoder;
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
     private JwtFilter filter;
-    private static PasswordEncoder passwordEncoder;
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
@@ -36,15 +35,26 @@ public class SecurityConfiguration implements WebMvcConfigurer {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        System.out.println("WebSec configure(HttpSecurity) Call: 2");
-        http.cors().and().csrf().disable()  // was cors().and() after http
-                // to implement CSRF token https://www.javainuse.com/spring/boot_security_csrf
-                // "antMathcers" comes from Apache Ant build system.
-                // Since Spring 3, the next line replaces the old one:
-                // .authorizeRequests().antMatchers("/login", "/signup").permitAll()
-                .authorizeHttpRequests().requestMatchers("/login", "/signup").permitAll()
-                .anyRequest().authenticated()
-                .and()
+        http.cors().and().csrf().disable()
+                .authorizeRequests(requests -> requests
+                        .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()  // Allow all requests to /login
+                        .requestMatchers(new AntPathRequestMatcher("/signup")).permitAll()  // Allow all requests to /signup
+                        .requestMatchers(new AntPathRequestMatcher("/api/author**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/author/*")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/author/")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/genre**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/genre/*")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/genre")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/quote**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/quote/*")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/quote")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/subgenre**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/subgenre/*")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/subgenre")).permitAll()
+
+
+                        .anyRequest().authenticated()
+                )
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
