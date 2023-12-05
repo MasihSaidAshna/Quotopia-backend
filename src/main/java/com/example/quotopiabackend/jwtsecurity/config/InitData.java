@@ -2,6 +2,7 @@ package com.example.quotopiabackend.jwtsecurity.config;
 
 import com.example.quotopiabackend.jwtsecurity.dto.dtoAuthor.AuthorDTO;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoGenre.GenreDTO;
+import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteConverter;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteDTO;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoSubGenre.SubGenreDTO;
 import com.example.quotopiabackend.jwtsecurity.service.AuthorService;
@@ -14,13 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class InitData implements CommandLineRunner {
+public class InitData implements CommandLineRunner
+{
 
     private final AuthorService authorService;
 
     private final GenreService genreService;
 
-    private final QuoteService quoteService;
+   private  final QuoteService quoteService;
 
     public InitData(AuthorService authorService, GenreService genreService, QuoteService quoteService) {
         this.authorService = authorService;
@@ -29,7 +31,8 @@ public class InitData implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) {
+    public void run(String... args)
+    {
         AuthorDTO author1 = createAuthor("John Doe", new ArrayList<>());
         AuthorDTO author2 = createAuthor("Jane Smith", new ArrayList<>());
         AuthorDTO author3 = createAuthor("Cihad Özdemir", new ArrayList<>());
@@ -47,26 +50,27 @@ public class InitData implements CommandLineRunner {
         createQuote("I don't have to show anything to anyone. There is nothing to prove.", author4, genre4);
     }
 
-    private AuthorDTO createAuthor(String name, List<QuoteDTO> quotes) {
+    private AuthorDTO createAuthor(String name, List<QuoteDTO> quotes)
+    {
         AuthorDTO author = new AuthorDTO(0, name, quotes);
         return authorService.createAuthor(author);
     }
 
-    private GenreDTO createGenre(String name, List<SubGenreDTO> subGenres) {
+    private GenreDTO createGenre(String name, List<SubGenreDTO> subGenres)
+    {
         GenreDTO genre = new GenreDTO(-1, name, subGenres);
 
         return genreService.createGenre(genre);
     }
 
-    private void createQuote(String quote, AuthorDTO author, GenreDTO genre) {
-        QuoteDTO quote1 = new QuoteDTO(-1, quote, author.authorID(), genre.genreID());
+    private void createQuote(String quote, AuthorDTO author, GenreDTO genre)
+    {
+        QuoteDTO.AuthorDTO authorDTO = new QuoteDTO.AuthorDTO(author.authorID(), author.authorName());
+        QuoteDTO.GenreDTO genreDTO = new QuoteDTO.GenreDTO(genre.genreID(), genre.genreName());
 
-        quoteService.createQuote(quote1);
+        QuoteDTO quoteDTO = new QuoteDTO(-1, quote, authorDTO, genreDTO);
+
+        quoteService.createQuote(quoteDTO);
     }
-
-
 }
-
-
-
 

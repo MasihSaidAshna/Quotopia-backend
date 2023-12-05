@@ -2,12 +2,10 @@ package com.example.quotopiabackend.jwtsecurity.service;
 
 import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteConverter;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteDTO;
-import com.example.quotopiabackend.jwtsecurity.repository.QuoteRepository;
-import com.example.quotopiabackend.jwtsecurity.model.Author;
-import com.example.quotopiabackend.jwtsecurity.model.Genre;
 import com.example.quotopiabackend.jwtsecurity.model.Quote;
 import com.example.quotopiabackend.jwtsecurity.repository.AuthorRepository;
 import com.example.quotopiabackend.jwtsecurity.repository.GenreRepository;
+import com.example.quotopiabackend.jwtsecurity.repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +18,7 @@ public class QuoteService {
 
     @Autowired
     private QuoteRepository quoteRepository;
+
 
     @Autowired
     private GenreRepository genreRepository;
@@ -42,14 +41,6 @@ public class QuoteService {
         return quoteOptional.map(quoteConverter::toQuoteDTO).orElse(null);
     }
 
-    public QuoteDTO createQuote(QuoteDTO quoteDTO) {
-        Genre genre = genreRepository.findById(quoteDTO.genreID()).orElse(null);
-        Author author = authorRepository.findById(quoteDTO.authorId()).orElse(null);
-        Quote quote = quoteConverter.toQuoteModel(quoteDTO, genre, author);
-
-        quote = quoteRepository.save(quote);
-        return quoteConverter.toQuoteDTO(quote);
-    }
 
     public QuoteDTO updateQuote(int quoteId, QuoteDTO quoteDTO) {
         Quote existingQuote = quoteRepository.findById(quoteId).orElse(null);
@@ -70,9 +61,13 @@ public class QuoteService {
         }
         return false; // Quote with given ID not found
     }
-
-
+    public QuoteDTO createQuote(QuoteDTO quoteDTO) {
+        Quote quote = quoteConverter.toQuoteModel(quoteDTO);
+        quote = quoteRepository.save(quote);
+        return quoteConverter.toQuoteDTO(quote);
+    }
 }
+
 
 
 
