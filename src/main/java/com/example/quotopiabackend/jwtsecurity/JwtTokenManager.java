@@ -29,7 +29,7 @@ public class JwtTokenManager {
                 .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY ))
                 .signWith(getSignInKey(),SignatureAlgorithm.HS512 )
                 .compact();
-                //.signWith(SignatureAlgorithm.HS512, jwtSecret).compact(); // before Spring 3
+        //.signWith(SignatureAlgorithm.HS512, jwtSecret).compact(); // before Spring 3
     }
 
     private Key getSignInKey() {

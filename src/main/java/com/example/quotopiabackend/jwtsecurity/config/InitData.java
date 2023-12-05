@@ -42,7 +42,7 @@ public class InitData implements CommandLineRunner {
 
         createQuote("This is a quote.", author1, genre1);
         createQuote("Another quote.", author2, genre2);
-        createQuote("Just finish  school and make money", author3, genre3);
+        createQuote("Just finish school and make money", author3, genre3);
         createQuote("I don't mind people hating me, because it pushes me.", author4, genre4);
         createQuote("I don't have to show anything to anyone. There is nothing to prove.", author4, genre4);
     }

@@ -21,25 +21,9 @@ public class UserService implements IUserService{
     @Autowired
     private UserRepository userRepository;
 
-
-    @PreAuthorize("hasRole('ADMIN')")
-    public void changeUserRole(int userId, boolean isAdmin) {
-       Optional<User> optionalUser = userRepository.findById(userId);
-
-       if (optionalUser.isPresent()){
-           User user = optionalUser.get();
-           user.setAdmin(isAdmin);
-           userRepository.save(user);
-       }else {
-           throw new RuntimeException("User not found");
-       }
-    }
-
     @Override
     public Set<User> findAll() {
-        Set<User> set = new HashSet<>();
-        userRepository.findAll().forEach(set::add);
-        return set;
+        return new HashSet<>(userRepository.findAll());
     }
 
     @Override
@@ -57,21 +41,19 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public void deleteById(Integer integer) {
+    public void deleteById(Integer intU) {
 
     }
 
     @Override
-    public Optional<User> findById(Integer integer) {
-        return Optional.empty();
+    public Optional<User> findById(Integer intU) {
+        return userRepository.findById(intU);
     }
-
-
 
     @Override
     public List<User> findByName(String name) {
         System.out.println("Userservice called findByName with argument: " + name);
-        return userRepository.findByUsername(name);
+        return userRepository.findByUserName(name);
     }
 
 }

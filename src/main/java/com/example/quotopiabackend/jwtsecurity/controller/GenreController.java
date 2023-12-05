@@ -23,7 +23,7 @@ public class GenreController {
 
     }
 
-    @GetMapping("/{id)")
+    @GetMapping("/{id}")
     public ResponseEntity<GenreDTO> getGenreByID(@PathVariable int id) {
         GenreDTO genreDTO = genreService.getGenreById(id);
         return (genreDTO != null) ? ResponseEntity.ok(genreDTO) : ResponseEntity.notFound().build();
@@ -37,7 +37,7 @@ public class GenreController {
     }
 
     //todo forbehold til admin
-    @PutMapping("/{id)")
+    @PutMapping("/{id}")
     public ResponseEntity<GenreDTO> createGenre(@PathVariable int id, @RequestBody GenreDTO genreDTO) {
         GenreDTO updatedGenre = genreService.updateGenre(id, genreDTO);
         return (updatedGenre != null) ? ResponseEntity.ok(updatedGenre) : ResponseEntity.notFound().build();

@@ -53,7 +53,6 @@ public class JwtController {
         }
     }
 
-
     @PostMapping("/login")
     public ResponseEntity<JwtResponseModel> createToken(@RequestBody JwtRequestModel request) throws Exception {
         // HttpServletRequest servletRequest is available from Spring, if needed.
@@ -66,7 +65,7 @@ public class JwtController {
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
-            return ResponseEntity.ok(new JwtResponseModel("bad credentials"));
+            return ResponseEntity.notFound().build();
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
         final String jwtToken = jwtTokenManager.generateJwtToken(userDetails);
