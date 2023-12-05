@@ -14,10 +14,10 @@ public class QuoteController {
     @Autowired
     private QuoteService quoteService;
 
-    @GetMapping
-    public ResponseEntity<List<QuoteDTO>> getAllQuotes() {
-        return ResponseEntity.ok(quoteService.getAllQuotes());
-    }
+        @GetMapping()
+        public ResponseEntity<List<QuoteDTO>> getAllQuotes() {
+            return ResponseEntity.ok(quoteService.getAllQuotes());
+        }
 
     @GetMapping("/{id}")
     public ResponseEntity<QuoteDTO> getQuoteById(@PathVariable int id) {
