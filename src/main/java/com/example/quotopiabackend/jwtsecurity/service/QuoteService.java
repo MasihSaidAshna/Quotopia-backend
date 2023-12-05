@@ -1,13 +1,11 @@
-package com.example.quotopiabackend.service;
+package com.example.quotopiabackend.jwtsecurity.service;
 
-import com.example.quotopiabackend.dto.dtoQuote.QuoteConverter;
-import com.example.quotopiabackend.dto.dtoQuote.QuoteDTO;
-import com.example.quotopiabackend.model.Author;
-import com.example.quotopiabackend.model.Genre;
-import com.example.quotopiabackend.model.Quote;
-import com.example.quotopiabackend.repository.AuthorRepository;
-import com.example.quotopiabackend.repository.GenreRepository;
-import com.example.quotopiabackend.repository.QuoteRepository;
+import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteConverter;
+import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteDTO;
+import com.example.quotopiabackend.jwtsecurity.model.Quote;
+import com.example.quotopiabackend.jwtsecurity.repository.AuthorRepository;
+import com.example.quotopiabackend.jwtsecurity.repository.GenreRepository;
+import com.example.quotopiabackend.jwtsecurity.repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +18,7 @@ public class QuoteService {
 
     @Autowired
     private QuoteRepository quoteRepository;
+
 
     @Autowired
     private GenreRepository genreRepository;

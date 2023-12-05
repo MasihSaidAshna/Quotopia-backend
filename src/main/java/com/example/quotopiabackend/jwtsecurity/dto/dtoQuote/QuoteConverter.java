@@ -1,9 +1,10 @@
-package com.example.quotopiabackend.dto.dtoQuote;
+package com.example.quotopiabackend.jwtsecurity.dto.dtoQuote;
 
-import com.example.quotopiabackend.model.Author;
-import com.example.quotopiabackend.model.Genre;
-import com.example.quotopiabackend.model.Quote;
-import com.example.quotopiabackend.service.AuthorService;
+import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteDTO;
+import com.example.quotopiabackend.jwtsecurity.model.Author;
+import com.example.quotopiabackend.jwtsecurity.model.Genre;
+import com.example.quotopiabackend.jwtsecurity.model.Quote;
+import com.example.quotopiabackend.jwtsecurity.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

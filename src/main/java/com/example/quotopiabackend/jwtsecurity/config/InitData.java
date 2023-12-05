@@ -2,6 +2,7 @@ package com.example.quotopiabackend.jwtsecurity.config;
 
 import com.example.quotopiabackend.jwtsecurity.dto.dtoAuthor.AuthorDTO;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoGenre.GenreDTO;
+import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteConverter;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteDTO;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoSubGenre.SubGenreDTO;
 import com.example.quotopiabackend.jwtsecurity.service.AuthorService;
@@ -21,7 +22,7 @@ public class InitData implements CommandLineRunner
 
     private final GenreService genreService;
 
-    private final QuoteService quoteService;
+   private  final QuoteService quoteService;
 
     public InitData(AuthorService authorService, GenreService genreService, QuoteService quoteService) {
         this.authorService = authorService;
