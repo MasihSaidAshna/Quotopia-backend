@@ -7,6 +7,8 @@ import com.example.quotopiabackend.jwtsecurity.repository.AuthorRepository;
 import com.example.quotopiabackend.jwtsecurity.repository.GenreRepository;
 import com.example.quotopiabackend.jwtsecurity.repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,11 +25,16 @@ public class QuoteService {
     @Autowired
     private QuoteConverter quoteConverter;
 
-    public List<QuoteDTO> getAllQuotes() {
+/*    public List<QuoteDTO> getAllQuotes() {
         List<Quote> quotes = quoteRepository.findAll();
         return quotes.stream()
                 .map(quoteConverter::toQuoteDTO)
                 .collect(Collectors.toList());
+    }*/
+
+    public Page<QuoteDTO> getAllQuotes(Pageable pageable) {
+        return quoteRepository.findAll(pageable)
+                .map(quoteConverter::toQuoteDTO);
     }
 
     public QuoteDTO getQuoteById(int quoteId) {
