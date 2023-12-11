@@ -4,12 +4,15 @@ import com.example.quotopiabackend.jwtsecurity.model.Author;
 import com.example.quotopiabackend.jwtsecurity.model.Genre;
 import com.example.quotopiabackend.jwtsecurity.model.Quote;
 import com.example.quotopiabackend.jwtsecurity.repository.AuthorRepository;
+import com.example.quotopiabackend.jwtsecurity.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 @Component
 public class QuoteConverter
 {
 
+    @Autowired
+    GenreRepository genreRepository;
     @Autowired
     AuthorRepository authorRepository;
 
@@ -61,7 +64,15 @@ public class QuoteConverter
 
         QuoteDTO.GenreDTO genreDTO = quoteDTO.genre();
         if (genreDTO != null) {
-            // Similar logic for Genre if needed
+            Genre genre = genreRepository.findById(genreDTO.genreID()).orElse(null);
+            if (genre == null) {
+                // If genre doesn't exist, create a new one and save it
+                genre = new Genre();
+                genre.setGenreID(genreDTO.genreID());
+                genre.setGenreName(genreDTO.genreName());
+                genre = genreRepository.save(genre);
+            }
+            quote.setGenre(genre);
         }
 
         return quote;
