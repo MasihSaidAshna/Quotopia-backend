@@ -3,6 +3,8 @@ package com.example.quotopiabackend.jwtsecurity.controller;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoAuthor.AuthorDTO;
 import com.example.quotopiabackend.jwtsecurity.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +20,14 @@ public class AuthorController {
 
 
 
-    @GetMapping
+/*    @GetMapping
     public ResponseEntity<List<AuthorDTO>> getAllAuthors() {
         return ResponseEntity.ok(authorService.getAllAuthors());
+    }*/
+
+    @GetMapping
+    public Page<AuthorDTO> getAllAuthors(Pageable pageable) {
+        return authorService.getAllAuthors(pageable);
     }
 
     @GetMapping("/{id}")

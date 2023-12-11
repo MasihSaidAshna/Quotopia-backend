@@ -5,6 +5,8 @@ import com.example.quotopiabackend.jwtsecurity.dto.dtoAuthor.AuthorDTO;
 import com.example.quotopiabackend.jwtsecurity.model.Author;
 import com.example.quotopiabackend.jwtsecurity.repository.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,11 +22,15 @@ public class AuthorService {
     @Autowired
     private AuthorConverter authorConverter;
 
-    public List<AuthorDTO> getAllAuthors() {
+    /*public List<AuthorDTO> getAllAuthors() {
         List<Author> authors = authorRepository.findAll();
         return authors.stream()
                 .map(authorConverter::toAuthorDTO)
                 .collect(Collectors.toList());
+    }*/
+
+    public Page<AuthorDTO> getAllAuthors(Pageable pageable) {
+        return authorRepository.findAll(pageable).map(authorConverter::toAuthorDTO);
     }
 
     public AuthorDTO getAuthorById(int authorID) {
