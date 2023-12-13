@@ -51,9 +51,9 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public List<User> findByName(String name) {
+    public User findByName(String name) {
         System.out.println("Userservice called findByName with argument: " + name);
-        return userRepository.findByUserName(name);
+        return userRepository.findByUsername(name);
     }
 
 }
