@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface QuoteRepository extends JpaRepository<Quote, Integer> {
-    List<Quote> findByGenre(String genre);
+    List<Quote> findByGenreGenreID(int genreID);
 }

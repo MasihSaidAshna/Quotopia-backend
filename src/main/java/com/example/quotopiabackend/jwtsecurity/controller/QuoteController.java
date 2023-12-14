@@ -44,11 +44,11 @@ public class QuoteController {
         return (deleted) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-        @GetMapping("/byGenre")
-        public ResponseEntity<List<QuoteDTO>> getQuotesByGenre(@RequestParam String genre) {
-            List<QuoteDTO> quotesByGenre = quoteService.getQuotesByGenre(genre);
-            return ResponseEntity.ok(quotesByGenre);
-        }
+    @GetMapping("/byGenre")
+    public ResponseEntity<List<QuoteDTO>> getQuotesByGenre(@RequestParam int genreID) {
+        List<QuoteDTO> quotesByGenre = quoteService.getQuotesByGenre(genreID);
+        return ResponseEntity.ok(quotesByGenre);
+    }
 
 
 
