@@ -17,13 +17,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 @CrossOrigin
 @Configuration
 @AllArgsConstructor
 public class SecurityConfiguration implements WebMvcConfigurer {
-
-
-
     private static PasswordEncoder passwordEncoder;
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
     private JwtFilter filter;
@@ -80,6 +78,5 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
-
 
 }

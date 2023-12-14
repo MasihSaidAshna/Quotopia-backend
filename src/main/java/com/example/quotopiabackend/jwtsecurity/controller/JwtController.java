@@ -6,6 +6,8 @@ import com.example.quotopiabackend.jwtsecurity.model.JwtResponseModel;
 import com.example.quotopiabackend.jwtsecurity.model.User;
 import com.example.quotopiabackend.jwtsecurity.service.IUserService;
 import com.example.quotopiabackend.jwtsecurity.service.JwtUserDetailsService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 @CrossOrigin
 @NoArgsConstructor
@@ -60,24 +65,44 @@ public class JwtController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<JwtResponseModel> createToken(@RequestBody JwtRequestModel request) throws Exception {
-        // HttpServletRequest servletRequest is available from Spring, if needed.
-        System.out.println(" JwtController createToken Call: 4" + request.getUsername());
+    public ResponseEntity<JwtResponseModel> createToken(@RequestBody JwtRequestModel request, HttpServletResponse response) throws Exception {
         try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getUsername(),
-                            request.getPassword())
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
             );
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            // Assuming successful login, create a session ID
+            String sessionId = UUID.randomUUID().toString();
+
+            // Set the session cookie
+            Cookie cookie = new Cookie("SESSION_ID", sessionId);
+            cookie.setHttpOnly(true);
+            cookie.setMaxAge(3600); // Cookie expiration time in seconds (adjust as needed)
+            response.addCookie(cookie);
+
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
+            final String jwtToken = jwtTokenManager.generateJwtToken(userDetails);
+
+            return ResponseEntity.ok(new JwtResponseModel(jwtToken));
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
             return ResponseEntity.notFound().build();
         }
-        final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
-        final String jwtToken = jwtTokenManager.generateJwtToken(userDetails);
-        return ResponseEntity.ok(new JwtResponseModel(jwtToken));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<Map<String, String>> logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("SESSION_ID", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        Map<String, String> map = new HashMap<>();
+        map.put("message", "Logout successful");
+        return ResponseEntity.ok(map);
+    }
 
     @PostMapping("/getSecret")
     public ResponseEntity<Map> getSecret() {
@@ -90,7 +115,6 @@ public class JwtController {
     @DeleteMapping("/deleteUser")
     public ResponseEntity<Map> deleteUser(@RequestBody User user) { // hvis man kommer hertil, er token OK
         System.out.println("deleteUser is called with user: " + user.getUsername());
-        // evt. findById, som finder hele objektet fra MySQL, inkl. id.
         User userToDelete = userService.findByName(user.getUsername());
         userService.delete(userToDelete);
         Map<String, String> map = new HashMap<>();
