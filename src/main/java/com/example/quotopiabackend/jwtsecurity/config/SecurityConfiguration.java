@@ -52,6 +52,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                         .requestMatchers(new AntPathRequestMatcher("/api/subgenre**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/subgenre/*")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/subgenre")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/quote/byGenre")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)

@@ -67,14 +67,17 @@ public class QuoteService
         return quoteConverter.toQuoteDTO(quote);
     }
 
-    public List<QuoteDTO> getQuotesByGenre(String genre) {
-        List<Quote> quotesByGenre = quoteRepository.findByGenre(genre);
+
+    public List<QuoteDTO> getQuotesByGenre(int genreID)
+    {
+        List<Quote> quotesByGenre = quoteRepository.findByGenreGenreID(genreID);
 
         // Convert Quote entities to QuoteDTOs using the converter
         return quotesByGenre.stream()
                 .map(quoteConverter::toQuoteDTO)
                 .collect(Collectors.toList());
     }
+
 }
 
 
