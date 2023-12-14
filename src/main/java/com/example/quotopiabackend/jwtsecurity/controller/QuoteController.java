@@ -15,11 +15,10 @@ public class QuoteController {
     @Autowired
     private QuoteService quoteService;
 
-
-    @GetMapping()
-    public ResponseEntity<List<QuoteDTO>> getAllQuotes() {
-        return ResponseEntity.ok(quoteService.getAllQuotes());
-    }
+        @GetMapping()
+        public ResponseEntity<List<QuoteDTO>> getAllQuotes() {
+            return ResponseEntity.ok(quoteService.getAllQuotes());
+        }
 
     @GetMapping("/{id}")
     public ResponseEntity<QuoteDTO> getQuoteById(@PathVariable int id) {
@@ -45,11 +44,13 @@ public class QuoteController {
         return (deleted) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/byGenre")
-    public ResponseEntity<List<QuoteDTO>> getQuotesByGenre(@RequestParam String genre) {
-        List<QuoteDTO> quotesByGenre = quoteService.getQuotesByGenre(genre);
-        return ResponseEntity.ok(quotesByGenre);
-    }
+        @GetMapping("/byGenre")
+        public ResponseEntity<List<QuoteDTO>> getQuotesByGenre(@RequestParam String genre) {
+            List<QuoteDTO> quotesByGenre = quoteService.getQuotesByGenre(genre);
+            return ResponseEntity.ok(quotesByGenre);
+        }
+
+
 
 }
 
