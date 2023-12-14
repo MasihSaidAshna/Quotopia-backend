@@ -4,10 +4,13 @@ package com.example.quotopiabackend.jwtsecurity.controller;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoGenre.GenreDTO;
 import com.example.quotopiabackend.jwtsecurity.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -18,11 +21,22 @@ public class GenreController {
     private GenreService genreService;
 
 
-        @GetMapping
-        public ResponseEntity<List<GenreDTO>> getAllGenres() {
-            return ResponseEntity.ok(genreService.getAllGenres());
+/*    @GetMapping
+    public ResponseEntity<List<GenreDTO>> getAllGenres() {
+        return ResponseEntity.ok(genreService.getAllGenres());
 
-        }
+    }*/
+
+    @GetMapping()
+    public ResponseEntity<Page<GenreDTO>> getAllGenres(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "genreName") String sort) {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+        return ResponseEntity.ok(genreService.getAllGenres(pageable));
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<GenreDTO> getGenreByID(@PathVariable int id) {
