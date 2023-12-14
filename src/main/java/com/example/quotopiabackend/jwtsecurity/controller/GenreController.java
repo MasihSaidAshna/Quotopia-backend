@@ -17,11 +17,12 @@ public class GenreController {
     @Autowired
     private GenreService genreService;
 
-    @GetMapping
-    public ResponseEntity<List<GenreDTO>> getAllGenres() {
-        return ResponseEntity.ok(genreService.getAllGenres());
 
-    }
+        @GetMapping
+        public ResponseEntity<List<GenreDTO>> getAllGenres() {
+            return ResponseEntity.ok(genreService.getAllGenres());
+
+        }
 
     @GetMapping("/{id}")
     public ResponseEntity<GenreDTO> getGenreByID(@PathVariable int id) {
