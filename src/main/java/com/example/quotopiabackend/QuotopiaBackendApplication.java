@@ -8,6 +8,7 @@ public class QuotopiaBackendApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(QuotopiaBackendApplication.class, args);
+
     }
 
 }

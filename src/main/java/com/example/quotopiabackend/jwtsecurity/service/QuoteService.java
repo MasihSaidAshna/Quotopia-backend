@@ -9,6 +9,7 @@ import com.example.quotopiabackend.jwtsecurity.repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,8 +68,16 @@ public class QuoteService
         quote = quoteRepository.save(quote);
         return quoteConverter.toQuoteDTO(quote);
     }
-}
 
+    public List<QuoteDTO> getQuotesByGenre(String genre) {
+        List<Quote> quotesByGenre = quoteRepository.findByGenre(genre);
+
+        // Convert Quote entities to QuoteDTOs using the converter
+        return quotesByGenre.stream()
+                .map(quoteConverter::toQuoteDTO)
+                .collect(Collectors.toList());
+    }
+}
 
 
 
