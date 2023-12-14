@@ -14,12 +14,15 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
+@CrossOrigin
 @Configuration
 @AllArgsConstructor
 public class SecurityConfiguration implements WebMvcConfigurer {
+
+
 
     private static PasswordEncoder passwordEncoder;
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
@@ -51,8 +54,6 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                         .requestMatchers(new AntPathRequestMatcher("/api/subgenre**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/subgenre/*")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/subgenre")).permitAll()
-
-
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
@@ -75,8 +76,10 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         registry.addMapping("/**")  // /** means match any string recursively
                 .allowedOriginPatterns("http://localhost:*/", "http://127.0.0.1:*/") //Multiple strings allowed. Wildcard * matches all port numbers.
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS") // decide which methods to allow
-                // Allow preflight checks to return successful
+                //   preflight checks to return successful
                 .allowedHeaders("*")
                 .allowCredentials(true);
     }
+
+
 }

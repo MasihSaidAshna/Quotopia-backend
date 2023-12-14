@@ -22,31 +22,18 @@ public class User {
     private int userID;
 
     @Column(name = "user_name", nullable = false)
-    private String userName;
+    private String username;
 
-    @Column(name = "user_email", nullable = false)
-    private String userEmail;
-
-    @Column(name = "is_admin", nullable = false)
-    private boolean isAdmin;
 
     @Column(name = "user_password", nullable = false)
     private String userPassword;
 
 
-    public User(String userName, String userEmail, boolean isAdmin, String userPassword) {
-        this.userName = userName;
-        this.userEmail = userEmail;
-        this.isAdmin = isAdmin;
-        this.userPassword = userPassword;
-    }
-
     @Column(name = "local_time", columnDefinition = "TIME")
     private LocalTime localTime = LocalTime.of(6,43,12);
 
-    public User(String userName, String userPassword) {
-        this.userName = userName;
+    public User(String username, String userPassword) {
+        this.username = username;
         this.userPassword = userPassword;
     }
-
 }
