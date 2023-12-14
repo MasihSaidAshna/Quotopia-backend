@@ -12,4 +12,6 @@ import java.util.List;
 public interface QuoteRepository extends JpaRepository<Quote, Integer> {
     List<Quote> findByGenre(String genre);
     Page<Quote> findAll(Pageable pageable);
+
+    List<Quote> findByGenreGenreID(int genreID);
 }
