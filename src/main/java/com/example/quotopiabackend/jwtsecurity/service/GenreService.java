@@ -5,11 +5,11 @@ import com.example.quotopiabackend.jwtsecurity.dto.dtoGenre.GenreDTO;
 import com.example.quotopiabackend.jwtsecurity.model.Genre;
 import com.example.quotopiabackend.jwtsecurity.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class GenreService {
@@ -20,12 +20,18 @@ public class GenreService {
     @Autowired
     private GenreConverter genreConverter;
 
-    public List<GenreDTO> getAllGenres() {
+/*    public List<GenreDTO> getAllGenres() {
         List<Genre> genres = genreRepository.findAll();
         return genres.stream()
                 .map(genreConverter::toGenreDTO)
                 .collect(Collectors.toList());
+    }*/
+
+    public Page<GenreDTO> getAllGenres(Pageable pageable) {
+        Page<Genre> genrePage = genreRepository.findAll(pageable);
+        return genrePage.map(genreConverter::toGenreDTO);
     }
+
 
     public GenreDTO getGenreById(int genreId) {
         Optional<Genre> genreOptional = genreRepository.findById(genreId);

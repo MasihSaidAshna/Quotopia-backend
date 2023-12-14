@@ -3,13 +3,13 @@ package com.example.quotopiabackend.jwtsecurity.service;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteConverter;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteDTO;
 import com.example.quotopiabackend.jwtsecurity.model.Quote;
-import com.example.quotopiabackend.jwtsecurity.repository.AuthorRepository;
-import com.example.quotopiabackend.jwtsecurity.repository.GenreRepository;
 import com.example.quotopiabackend.jwtsecurity.repository.QuoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,13 +25,11 @@ public class QuoteService
     @Autowired
     private QuoteConverter quoteConverter;
 
-    public List<QuoteDTO> getAllQuotes()
-    {
-        List<Quote> quotes = quoteRepository.findAll();
-        return quotes.stream()
-                .map(quoteConverter::toQuoteDTO)
-                .collect(Collectors.toList());
+    public Page<QuoteDTO> getAllQuotes(Pageable pageable) {
+        Page<Quote> quotePage = quoteRepository.findAll(pageable);
+        return quotePage.map(quoteConverter::toQuoteDTO);
     }
+
 
     public QuoteDTO getQuoteById(int quoteId)
     {

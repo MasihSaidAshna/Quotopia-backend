@@ -3,6 +3,10 @@ package com.example.quotopiabackend.jwtsecurity.controller;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoQuote.QuoteDTO;
 import com.example.quotopiabackend.jwtsecurity.service.QuoteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +19,21 @@ public class QuoteController {
     @Autowired
     private QuoteService quoteService;
 
-        @GetMapping()
-        public ResponseEntity<List<QuoteDTO>> getAllQuotes() {
+/*    @GetMapping()
+    public ResponseEntity<List<QuoteDTO>> getAllQuotes() {
             return ResponseEntity.ok(quoteService.getAllQuotes());
-        }
+        }*/
+
+    @GetMapping()
+    public ResponseEntity<Page<QuoteDTO>> getAllQuotes(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "quoteText") String sort) {
+
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+        return ResponseEntity.ok(quoteService.getAllQuotes(pageable));
+    }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<QuoteDTO> getQuoteById(@PathVariable int id) {
