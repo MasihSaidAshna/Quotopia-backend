@@ -15,3 +15,4 @@ public interface QuoteRepository extends JpaRepository<Quote, Integer> {
 
     List<Quote> findByGenreGenreID(int genreID);
 }
+
