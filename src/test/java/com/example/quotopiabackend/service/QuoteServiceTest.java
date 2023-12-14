@@ -28,15 +28,9 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @DataJpaTest
 public class QuoteServiceTest {
 
-    //@Mock
-    //QuoteRepository quoteRepository;
-    @Autowired
+      @Autowired
     private QuoteService quoteService;
     private QuoteConverter quoteConverter;
-
-    //private AuthorConverter authorConverter;
-
-    //private GenreConverter genreConverter;
 
     @BeforeAll
     public void setup() {
