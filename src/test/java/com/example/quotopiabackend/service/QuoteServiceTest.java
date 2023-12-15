@@ -40,11 +40,6 @@ public class QuoteServiceTest {
         Genre genre = new Genre(1, "Fiction", subgenres);
         Quote quote = new Quote(1, "This is a test", author, genre);
         QuoteDTO quoteDTO = quoteConverter.toQuoteDTO(quote);
-        //AuthorDTO authorDTO = authorConverter.toAuthorDTO(author);
-        //GenreDTO genreDTO = genreConverter.toGenreDTO(genre);
-        //QuoteDTO.AuthorDTO authorDTO1 = new QuoteDTO.AuthorDTO(1, "Stephen Hawking");
-        //QuoteDTO.GenreDTO genreDTO1 = new QuoteDTO.GenreDTO(1, "Science Fiction");
-
         quoteService.createQuote(quoteDTO);
     }
 
