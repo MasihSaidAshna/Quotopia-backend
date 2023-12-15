@@ -38,12 +38,16 @@ public class InitData implements CommandLineRunner {
         GenreDTO genre2 = createGenre("Science Fiction", new ArrayList<>());
         GenreDTO genre3 = createGenre("Science", new ArrayList<>());
         GenreDTO genre4 = createGenre("Sport", new ArrayList<>());
+        GenreDTO genre5 = createGenre("GoldenAdvice", new ArrayList<>());
 
         createQuote("This is a quote.", author1, genre1);
         createQuote("Another quote.", author2, genre2);
         createQuote("Just finish school and make money", author3, genre3);
+        createQuote("life dont care about you, make something out of it then", author3, genre5);
+        createQuote("people want to do something with their life, i just want to live", author3, genre5);
+        createQuote("always stay independent less headache", author3, genre5);
+        createQuote("just do as you wish, i will end on top", author3, genre5);
         createQuote("I don't mind people hating me, because it pushes me.", author4, genre4);
-        createQuote("I don't have to show anything to anyone. There is nothing to prove.", author4, genre4);
     }
 
     private AuthorDTO createAuthor(String name, List<QuoteDTO> quotes) {

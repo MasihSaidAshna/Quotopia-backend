@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface QuoteRepository extends JpaRepository<Quote, Integer> {
+    List<Quote> findTop4ByOrderByQuoteIDDesc();
     List<Quote> findByGenre(String genre);
     Page<Quote> findAll(Pageable pageable);
 

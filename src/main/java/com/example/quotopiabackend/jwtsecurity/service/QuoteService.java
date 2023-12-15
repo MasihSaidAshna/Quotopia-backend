@@ -30,6 +30,12 @@ public class QuoteService
         return quotePage.map(quoteConverter::toQuoteDTO);
     }
 
+    public List<QuoteDTO> getTop4NewQuotes() {
+        List<Quote> top4Quotes = quoteRepository.findTop4ByOrderByQuoteIDDesc();
+        return top4Quotes.stream()
+                .map(quoteConverter::toQuoteDTO)
+                .collect(Collectors.toList());
+    }
 
     public QuoteDTO getQuoteById(int quoteId)
     {

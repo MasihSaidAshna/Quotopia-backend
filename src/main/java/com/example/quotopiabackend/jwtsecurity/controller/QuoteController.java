@@ -24,6 +24,11 @@ public class QuoteController {
             return ResponseEntity.ok(quoteService.getAllQuotes());
         }*/
 
+    @GetMapping("/top4new")
+    public ResponseEntity<List<QuoteDTO>> getTop4NewQuotes() {
+        List<QuoteDTO> top4Quotes = quoteService.getTop4NewQuotes();
+        return ResponseEntity.ok(top4Quotes);
+    }
     @GetMapping()
     public ResponseEntity<List<QuoteDTO>> getAllQuotes(
             @RequestParam(defaultValue = "0") int page,
