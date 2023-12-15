@@ -4,12 +4,13 @@ package com.example.quotopiabackend.jwtsecurity.controller;
 import com.example.quotopiabackend.jwtsecurity.dto.dtoGenre.GenreDTO;
 import com.example.quotopiabackend.jwtsecurity.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @CrossOrigin
@@ -28,13 +29,14 @@ public class GenreController {
     }*/
 
     @GetMapping()
-    public ResponseEntity<Page<GenreDTO>> getAllGenres(
+    public ResponseEntity<List<GenreDTO>> getAllGenres(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "genreName") String sort) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-        return ResponseEntity.ok(genreService.getAllGenres(pageable));
+        List<GenreDTO> genres = genreService.getAllGenres(pageable).getContent();
+        return ResponseEntity.ok(genres);
     }
 
 

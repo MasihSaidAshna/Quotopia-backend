@@ -12,4 +12,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUserID(Integer ID);
 
     User findByUsername(String username);
+
+
+
 }

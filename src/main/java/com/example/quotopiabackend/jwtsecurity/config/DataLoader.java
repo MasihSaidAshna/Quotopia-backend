@@ -26,7 +26,7 @@ public class DataLoader implements CommandLineRunner {
         if (userService.findByName(adminUsername) == null) {
             User defaultAdmin = new User();
             defaultAdmin.setUsername(adminUsername);
-            defaultAdmin.setUserPassword(passwordEncoder.encode("adminPassword"));
+            defaultAdmin.setUserPassword(passwordEncoder.encode("admin123"));
 
             userService.save(defaultAdmin);
         }
