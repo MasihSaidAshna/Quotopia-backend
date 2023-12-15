@@ -10,6 +10,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @CrossOrigin
 @RestController
@@ -27,13 +29,14 @@ public class AuthorController {
     }*/
 
     @GetMapping()
-    public ResponseEntity<Page<AuthorDTO>> getAllAuthors(
+    public ResponseEntity<List<AuthorDTO>> getAllAuthors(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue = "authorName") String sort) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-        return ResponseEntity.ok(authorService.getAllAuthors(pageable));
+        List<AuthorDTO> authors = authorService.getAllAuthors(pageable).getContent();
+        return ResponseEntity.ok(authors);
     }
 
 

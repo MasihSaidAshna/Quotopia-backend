@@ -25,15 +25,15 @@ public class QuoteController {
         }*/
 
     @GetMapping()
-    public ResponseEntity<Page<QuoteDTO>> getAllQuotes(
+    public ResponseEntity<List<QuoteDTO>> getAllQuotes(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "quoteText") String sort) {
-
+            @RequestParam(defaultValue = "quoteText") String sort
+    ) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-        return ResponseEntity.ok(quoteService.getAllQuotes(pageable));
+        List<QuoteDTO> quotes = quoteService.getAllQuotes(pageable).getContent();
+        return ResponseEntity.ok(quotes);
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<QuoteDTO> getQuoteById(@PathVariable int id) {

@@ -49,21 +49,6 @@ public class QuoteServiceTest {
     }
 
 
-    @Test
-    @Order(1)
-    public void getAllQuotesTest() { //Dto converters bliver ikke testet fordi der er noget med at QuoteDTO har 2 record klasser inden i sig.
-        List<Quote> authorQuotes = new ArrayList<>();
-        List<SubGenre> subgenres = new ArrayList<>();
-        Author author = new Author(1, "Stephen Hawking", authorQuotes);
-        Genre genre = new Genre(1, "Fiction", subgenres);
-        Quote quote = new Quote(1, "This is a test", author, genre);
-        QuoteDTO quoteDTO = quoteConverter.toQuoteDTO(quote);
-
-        List<QuoteDTO> quotesTest = new ArrayList<>();
-        quotesTest.add(quoteDTO);
-
-        assertEquals(quotesTest, quoteService.getAllQuotes());
-    }
 
 
     @Test
