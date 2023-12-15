@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+/*@Component
 public class InitData implements CommandLineRunner {
 
     @Autowired
@@ -69,5 +69,5 @@ public class InitData implements CommandLineRunner {
 
         quoteService.createQuote(quoteDTO);
     }
-}
+}*/
 
